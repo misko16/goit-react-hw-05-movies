@@ -1,3 +1,4 @@
+import Home from "pages/Home";
 import StyledLink from "../StyledLink";
 import { Route, Routes } from "react-router-dom";
 
@@ -11,10 +12,8 @@ const App = () => {
       </nav>
       <main>
         <Routes>
+          <Route path="/" element={ <Home/>}></Route>
           <Route></Route>
-          <Route></Route>
-
-
         </Routes>
       </main>
     </div>

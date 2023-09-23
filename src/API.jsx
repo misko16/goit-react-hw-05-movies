@@ -1,7 +1,8 @@
 // 58421809dbb0088b2fcbfd8c4651b065
+
 import axios from "axios";
 
-const BASE_URL = `https://www.themoviedb.org`; //тут мб підправити потрібно буде
+const BASE_URL = `https://www.themoviedb.org`;
 const API_KEY = `58421809dbb0088b2fcbfd8c4651b065`;
 
 export const fetchTrendingMovies = async () => {
@@ -19,9 +20,9 @@ export const fetchTrendingMovies = async () => {
     }
 };
 
-export const fetchMovieDetails = async() => {
+export const fetchMovieDetails = async(movieId) => {
     try{
-        const response = await axios.get(`${BASE_URL}/movies/get-movie-details`,{
+        const response = await axios.get(`${BASE_URL}/get-movie-details/${movieId}`,{
 params:{
     api_key:API_KEY,
         },
@@ -32,9 +33,9 @@ return response.data.results;
 };
 };
 
-export const fetchMovieCredits = async() => {
+export const fetchMovieCredits = async(movieId) => {
 try{
-    const response = await axios.get(`${BASE_URL}/movies/get-movie-credits`,{
+    const response = await axios.get(`${BASE_URL}/get-movie-credits/${movieId}`,{
     params:{
 api_key: API_KEY,
         },
@@ -46,9 +47,9 @@ catch(error){
 }
 };
 
-export const fetchMovieReview = async() => {
+export const fetchMovieReview = async(movieId) => {
     try{
-        const response = await axios.get(`${BASE_URL}/movies/get-movie-reviews`,{
+        const response = await axios.get(`${BASE_URL}/get-movie-reviews/${movieId}`,{
             params:{
                 api_key:API_KEY,
             },
