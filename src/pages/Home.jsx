@@ -1,5 +1,6 @@
 import { fetchTrendingMovies } from "API";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Home() {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -16,12 +17,11 @@ function Home() {
 
   return (
     <div>
-      <h1>Films which are popular today</h1>
       <ul>
         {trendingMovies.map((movie) => (
           <li key={movie.id}>
-            <h2>{movie.title}</h2>
-            <p>Year when film was released: {movie.release_date}</p>
+            <h2>
+            <Link to={`/movie/${movie.id}`}>{movie.title}</Link>          </h2>
           </li>
         ))}
       </ul>
