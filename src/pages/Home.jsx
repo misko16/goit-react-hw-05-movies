@@ -17,11 +17,13 @@ function Home() {
 
   return (
     <div>
+      <h2>Popular films for today</h2>
       <ul>
         {trendingMovies.map((movie) => (
           <li key={movie.id}>
-            <h2>
-            <Link to={`/movie/${movie.id}`}>{movie.title}</Link>          </h2>
+            <p>
+            <Link to={`/movie/${movie.id}`}>{movie.title}</Link>         
+             </p>
           </li>
         ))}
       </ul>
