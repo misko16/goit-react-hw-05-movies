@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { handleSearch } from "API";
+import SearchForm from "components/SearchForm";
+import MovieInformation from "components/MovieInformation";
 
 function MovieSearch({ onSearch }) {
   const [search, setSearch] = useState("");
@@ -22,31 +24,12 @@ function MovieSearch({ onSearch }) {
   return (
     <div>
       <h2>Search for Movies</h2>
-      <form onSubmit={handleSearchSubmit}>
-        <input
-          type="text"
-          placeholder="Enter a movie title..."
-          value={search}
-          onChange={handleSearchChange}
-        />
-        <button type="submit">Search</button>
-      </form>
+      <SearchForm handleSearchSubmit={handleSearchSubmit}
+       handleSearchChange={handleSearchChange}
+       search={search}/>
 
       {searchResults.length > 0 ? (
-        <ul>
-          {searchResults.map((movie) => (
-            <li key={movie.id}>
-              <h3>{movie.title}</h3>
-              <p>{movie.overview}</p>
-              {movie.poster_path && (
-                <img
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt={movie.title}
-                />
-              )}
-            </li>
-          ))}
-        </ul>
+      <MovieInformation searchResults={searchResults}/>
       ) : (
         <p>No results found</p>
       )}

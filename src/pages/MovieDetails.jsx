@@ -12,12 +12,13 @@ function Details() {
         setMovieDetails(data);
       })
       .catch((error) => {
-        console.log("Error fetching movie details:", error);
+        console.log("Error with movie details:", error);
       });
   }, [movieId]);
 
   if (!movieDetails) {
-    return <div>Idiot</div>;
+    return <div>You have a really big problems if you see this message. 
+    Press button f12</div>;
   }
 
   return (
