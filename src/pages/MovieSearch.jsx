@@ -2,25 +2,35 @@ import React, { useState, useEffect } from "react";
 import SearchForm from "components/SearchForm";
 import MovieInformation from "components/MovieInformation";
 import { useSearchParams } from "react-router-dom";
+import { handleSearch } from "../API";
 
-function MovieSearch({ onSearch }) {
+function MovieSearch() {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const handleSearchChange = (event) => {
     setSearch(event.target.value);
   };
 
-  const handleSearchSubmit = (event) => {
-    event.preventDefault();
-
-    setSearchParams({ query: search });
-  };
-
   useEffect(() => {
     setSearchResults([]);
-  }, []);
+
+    const performSearch = async () => {
+      try {
+        const results = await handleSearch(search);
+        setSearchResults(results);
+      } catch (error) {
+        console.error("Error searching for movies:", error);
+      }
+    };
+    performSearch();
+  }, [search, searchParams]);
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    searchParams.set("query", search);
+  };
 
   return (
     <div>

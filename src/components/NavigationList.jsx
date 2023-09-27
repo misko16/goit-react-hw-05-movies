@@ -1,5 +1,6 @@
  import StyledLink from "StyledLink";
 import { Outlet } from "react-router-dom";
+import { Suspense } from "react";
  const NavigationList = () => {
     return(
        <div>
@@ -10,6 +11,7 @@ import { Outlet } from "react-router-dom";
     </nav>
     </header>
     <Outlet/>
+    <Suspense fallback={<div>Waiting for loading ...</div>}/>
     </div>
         );
     } 
