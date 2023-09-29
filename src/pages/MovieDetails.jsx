@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link,  } from "react-router-dom";
+import { useParams, Link, Outlet } from "react-router-dom"; // Додано Outlet
 import { fetchMovieDetails } from "API";
 
 function MovieDetails() {
@@ -32,8 +32,10 @@ function MovieDetails() {
       <p>Overview: {movieDetails.overview}</p>
       <p>Genres: {movieDetails.genres.map((genre) => genre.name).join(", ")}</p>
 
-      <Link to={`/movie/${movieId}/cast`}>Cast</Link>
-      <Link to={`/movie/${movieId}/reviews`}>Reviews</Link>
+      <Link to={`cast`}>Cast</Link>
+      <Link to={`reviews`}>Reviews</Link>
+
+      <Outlet />
     </div>
   );
 }

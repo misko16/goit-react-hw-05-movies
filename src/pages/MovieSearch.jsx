@@ -5,44 +5,40 @@ import { useSearchParams } from "react-router-dom";
 import { handleSearch } from "../API";
 
 function MovieSearch() {
-  const [search, setSearch] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const [searchParams] = useSearchParams();
+  const [movies, setMovies] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleSearchChange = (event) => {
-    setSearch(event.target.value);
+    setSearchParams({ search: event.target.value });
   };
 
   useEffect(() => {
-    setSearchResults([]);
+    setMovies([]);
+
+    const searchValue = searchParams.get("search") || "";
 
     const performSearch = async () => {
       try {
-        const results = await handleSearch(search);
-        setSearchResults(results);
+        const results = await handleSearch(searchValue);
+        setMovies(results);
       } catch (error) {
         console.error("Error searching for movies:", error);
       }
     };
     performSearch();
-  }, [search, searchParams]);
-
-  const handleSearchSubmit = (event) => {
-    event.preventDefault();
-    searchParams.set("query", search);
-  };
+  }, [searchParams]);
 
   return (
     <div>
       <h2>Search for Movies</h2>
       <SearchForm
-        handleSearchSubmit={handleSearchSubmit}
+        handleSearchSubmit={() => {}}
         handleSearchChange={handleSearchChange}
-        search={search}
+        search={searchParams.get("search") || ""}
       />
 
-      {searchResults.length > 0 ? (
-        <MovieInformation searchResults={searchResults} />
+      {movies.length > 0 ? (
+        <MovieInformation movieResults={movies} />
       ) : (
         <p>No results found</p>
       )}
@@ -51,3 +47,4 @@ function MovieSearch() {
 }
 
 export default MovieSearch;
+

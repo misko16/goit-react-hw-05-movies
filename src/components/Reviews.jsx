@@ -1,35 +1,37 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchMovieReview } from "API";
-function Reviews () {
+function Reviews() {
+  const { movieId } = useParams();
+  const [reviews, setReviews] = useState([]);
 
-const {movieId} = useParams();
-const{reviews, setReviews} = useState([]);
+  useEffect(() => {
+    fetchMovieReview(movieId)
+      .then((data) => {
+        setReviews(data.reviews);
+      })
+      .catch((error) => {
+        console.log("Error with reviews", error);
+      });
+  }, [movieId]);
 
-useEffect(() => {
-  fetchMovieReview(movieId)
-    .then((data) => {
-      setReviews(data.reviews);
-    })
-    .catch((error) => {
-      console.log(`Problems with reviews`, error);
-    });
-}, [movieId, setReviews]);
-
-
-return(
+  return (
     <div>
-        <h2>Reviews</h2>
+      <h2>Reviews</h2>
+      {reviews.length > 0 ? (
         <ul>
-        {reviews.map((review) => (
-          <li key={review.id}>
-            <h3>{review.author}</h3>
-            <p>{review.content}</p>
-          </li>
-        ))}
-      </ul>
+          {reviews.map((review) => (
+            <li key={review.id}>
+              <p>Author: {review.author}</p>
+              <p>Content: {review.content}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No reviews available yet.</p>
+      )}
     </div>
-    )
+  );
 }
+
 export default Reviews;
