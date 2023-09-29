@@ -1,33 +1,36 @@
 import Home from "pages/Home";
-import Details from "pages/MovieDetails";
 import { Route, Routes } from "react-router-dom";
 import MovieSearch from "pages/MovieSearch";
-import { handleSearch } from "API";
 import NavigationList from "./NavigationList";
 import NotFound from "pages/NotFound";
-import MovieInformation from "./MovieInformation";
+import { lazy, Suspense } from "react";
 
+const MovieDetails = lazy(() => import('../pages/MovieDetails'));
+const Cast = lazy(() => import('./Cast'));
+const Reviews = lazy(() => import('./Reviews'));
 
 const App = () => {
-  return(
+  return (
     <div>
-    <NavigationList/>
-        <Routes>
-          <Route path="/" element={<NavigationList />} />
+      <Routes>
+        <Route path="/" element={<NavigationList />}>
           <Route index element={<Home />} />
-          <Route path="/trending/get-trending" element={<Details/>}/>
+          <Route path="/movie" element={<MovieSearch />} />
+          <Route
+            path="/movie/:movieId"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <MovieDetails />
+              </Suspense>
+            }>
+            <Route path="cast" element={<Cast />} />
+            <Route path="reviews" element={<Reviews />} />
+          </Route>
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </div>
+  );
+};
 
-
-            <Route path="/movie" element={<Details/>}/>  
-            <Route path="/movie/:movieId" element={<MovieInformation />} />
-            <Route path="/movies/get-movie-credits" element/>
-            <Route path="/movies/get-movie-reviews" element/>
-
-          <Route path="/search/search-movies" element={<MovieSearch onSearch={handleSearch}/>} />
-         
-          <Route path="*" element={<NotFound/>}></Route>
-        </Routes>   
-         </div>
-  )
-}
 export default App;

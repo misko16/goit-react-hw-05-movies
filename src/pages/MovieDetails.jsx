@@ -1,8 +1,8 @@
+import React, { useEffect, useState } from "react";
+import { useParams, Link,  } from "react-router-dom";
 import { fetchMovieDetails } from "API";
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 
-function Details() {
+function MovieDetails() {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
 
@@ -17,8 +17,7 @@ function Details() {
   }, [movieId]);
 
   if (!movieDetails) {
-    return <div>You have a really big problems if you see this message. 
-    Press button f12</div>;
+    return <div>You have a really big problem if you see this message. Press button F12</div>;
   }
 
   return (
@@ -26,13 +25,17 @@ function Details() {
       <h1>{movieDetails.title}</h1>
       <img
         src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
-        alt={`${movieDetails.title} Poster`}/>
+        alt={`${movieDetails.title} Poster`}
+      />
       <p>When film was released: {movieDetails.release_date}</p>
       <p>Rating: {movieDetails.vote_average}</p>
       <p>Overview: {movieDetails.overview}</p>
-      <p>Genres: {movieDetails.genres.map((genre) => genre.name).join(', ')}</p>
+      <p>Genres: {movieDetails.genres.map((genre) => genre.name).join(", ")}</p>
+
+      <Link to={`/movie/${movieId}/cast`}>Cast</Link>
+      <Link to={`/movie/${movieId}/reviews`}>Reviews</Link>
     </div>
   );
 }
 
-export default Details;
+export default MovieDetails;

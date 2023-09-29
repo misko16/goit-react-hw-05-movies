@@ -7,8 +7,8 @@ import { Suspense } from "react";
        <header>
        <nav>
         <StyledLink to="/">Home</StyledLink>
-        <StyledLink to="/search">Search</StyledLink>
-    </nav>
+        <StyledLink to="/movie">Search</StyledLink>
+            </nav>
     </header>
     <Outlet/>
     <Suspense fallback={<div>Waiting for loading ...</div>}/>
