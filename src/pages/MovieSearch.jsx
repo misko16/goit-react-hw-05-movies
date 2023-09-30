@@ -12,29 +12,32 @@ function MovieSearch() {
     setSearchParams({ search: event.target.value });
   };
 
+  const handleSearchSubmit = async (event) => {
+    event.preventDefault();
+    const searchValue = searchParams.get("search") || "";
+    
+    if (searchValue.trim() === "") {
+      return;
+    }
+
+    try {
+      const results = await handleSearch(searchValue);
+      setMovies(results);
+    } catch (error) {
+      console.error("Error searching for movies:", error);
+    }
+  };
+
   useEffect(() => {
     setMovies([]);
-
-    const searchValue = searchParams.get("search") || "";
-
-    const performSearch = async () => {
-      try {
-        const results = await handleSearch(searchValue);
-        setMovies(results);
-      } catch (error) {
-        console.error("Error searching for movies:", error);
-      }
-    };
-    performSearch();
   }, [searchParams]);
 
   return (
     <div>
       <h2>Search for Movies</h2>
       <SearchForm
-        handleSearchSubmit={() => {}}
+        handleSearchSubmit={handleSearchSubmit}
         handleSearchChange={handleSearchChange}
-        search={searchParams.get("search") || ""}
       />
 
       {movies.length > 0 ? (
@@ -47,4 +50,3 @@ function MovieSearch() {
 }
 
 export default MovieSearch;
-

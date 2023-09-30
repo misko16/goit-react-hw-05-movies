@@ -20,7 +20,7 @@ function Cast() {
   }, [movieId, setCast]);
 
   if (loading) {
-    return <div>Loading...</div>; // Показуємо "Loading..." поки завантажується інформація
+    return <div>Loading...</div>; 
   }
 
   return (
