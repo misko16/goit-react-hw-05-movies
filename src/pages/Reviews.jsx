@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchMovieReview } from "API";
+import ReviewsList from "components/ReviewList";
+
 function Reviews() {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
@@ -8,7 +10,8 @@ function Reviews() {
   useEffect(() => {
     fetchMovieReview(movieId)
       .then((data) => {
-        setReviews(data.reviews);
+        console.log('Data for reviews:', data); // Додано цей рядок для перевірки
+        setReviews(data);
       })
       .catch((error) => {
         console.log("Error with reviews", error);
@@ -18,15 +21,8 @@ function Reviews() {
   return (
     <div>
       <h2>Reviews</h2>
-      {reviews.length > 0 ? (
-        <ul>
-          {reviews.map((review) => (
-            <li key={review.id}>
-              <p>Author: {review.author}</p>
-              <p>Content: {review.content}</p>
-            </li>
-          ))}
-        </ul>
+      {reviews && reviews.length > 0 ? (
+        <ReviewsList reviews={reviews} />
       ) : (
         <p>No reviews available yet.</p>
       )}

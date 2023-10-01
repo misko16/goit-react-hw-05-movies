@@ -5,8 +5,8 @@ const NavigationList = lazy(() => import("./NavigationList"));
 const Home = lazy(() => import("../pages/Home"));
 const MovieSearch = lazy(() => import("../pages/MovieSearch"));
 const MovieDetails = lazy(() => import("../pages/MovieDetails"));
-const Cast = lazy(() => import("./Cast"));
-const Reviews = lazy(() => import("./Reviews"));
+const Cast = lazy(() => import("../pages/Cast"));
+const Reviews = lazy(() => import("../pages/Reviews"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 
 const App = () => {
