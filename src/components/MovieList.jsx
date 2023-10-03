@@ -1,6 +1,6 @@
  import { Link } from "react-router-dom";
 
- const ListPopularFilms = ({trendingMovies}) => {
+ const MovieList = ({trendingMovies}) => {
     return(
         <ul>
         {trendingMovies.map((movie) => (
@@ -11,4 +11,4 @@
       </ul>
     );
  }
- export default ListPopularFilms;
+ export default MovieList;

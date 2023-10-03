@@ -17,14 +17,18 @@ function MovieDetails() {
   }, [movieId]);
 
   if (!movieDetails) {
-    return <div>You have a really big problem if you see this message. Press button F12</div>;
+    return;
   }
 
   return (
     <div>
       <h1>{movieDetails.title}</h1>
       <img
-        src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
+        src={  
+          movieDetails.poster_path 
+          ? `https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`
+        : `https://klike.net/uploads/posts/2019-05/medium/1556775907_2.jpg`
+        }
         alt={`${movieDetails.title} Poster`}
       />
       <p>When film was released: {movieDetails.release_date}</p>

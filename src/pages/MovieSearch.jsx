@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SearchForm from "components/SearchForm";
-import MovieInformation from "components/MovieInformation";
+import MovieList from "components/MovieList"; 
 import { useSearchParams } from "react-router-dom";
 import { handleSearch } from "../API";
 
@@ -14,7 +14,7 @@ function MovieSearch() {
 
   const handleSearchSubmit = async (event) => {
     event.preventDefault();
-    const searchValue = searchParams.get("search") || "";
+    const searchValue = searchParams.get("search");
     
     if (searchValue.trim() === "") {
       return;
@@ -41,7 +41,7 @@ function MovieSearch() {
       />
 
       {movies.length > 0 ? (
-        <MovieInformation movieResults={movies} />
+        <MovieList trendingMovies={movies} />
       ) : (
         <p>No results found</p>
       )}

@@ -1,5 +1,5 @@
 import { fetchTrendingMovies } from "API";
-import ListPopularFilms from "components/ListPopularFilms";
+import MovieList from "components/MovieList";
 import { useEffect, useState } from "react";
 
 function Home() {
@@ -18,7 +18,7 @@ function Home() {
   return (
     <div>
       <h2>Popular films for today</h2>
-      <ListPopularFilms trendingMovies={trendingMovies}/>
+      <MovieList trendingMovies={trendingMovies}/>
     </div>
   );
 }
