@@ -82,7 +82,7 @@ import axios from "axios";
             api_key: API_KEY,
           },
         });
-        return response.data.results; // Повертаємо лише results з даних
+        return response.data.results; 
       } catch (error) {
         throw error;
       }
