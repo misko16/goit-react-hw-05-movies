@@ -10,7 +10,7 @@ function Reviews() {
   useEffect(() => {
     fetchMovieReview(movieId)
       .then((data) => {
-        console.log('Data for reviews:', data); // Додано цей рядок для перевірки
+        console.log('Data for reviews:', data); 
         setReviews(data);
       })
       .catch((error) => {

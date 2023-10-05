@@ -5,7 +5,7 @@ const SearchForm = ({ onSearchSubmit }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSearchSubmit(search); 
+    onSearchSubmit(search);
   };
 
   const handleInputChange = (event) => {

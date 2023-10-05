@@ -6,7 +6,7 @@ import { handleSearch } from "../API";
 
 function MovieSearch() {
   const [movies, setMovies] = useState([]);
-  const [searchParams] = useSearchParams();
+  const searchParams = useSearchParams();
   const fetchSearchSubmitRef = useRef();
 
   useEffect(() => {
