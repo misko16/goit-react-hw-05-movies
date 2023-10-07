@@ -1,5 +1,5 @@
 import { fetchTrendingMovies } from "API";
-import MovieList from "components/MovieList";
+import MovieList from "components/refactoring/MovieList";
 import { useEffect, useState } from "react";
 
 function Home() {

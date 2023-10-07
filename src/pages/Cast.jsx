@@ -1,5 +1,5 @@
 import { fetchMovieCredits } from "API";
-import CastList from "components/CastList";
+import CastList from "components/refactoring/CastList";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 

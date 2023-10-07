@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 
-const NavigationList = lazy(() => import("./NavigationList"));
+const NavigationList = lazy(() => import("./refactoring/NavigationList"));
 const Home = lazy(() => import("../pages/Home"));
 const MovieSearch = lazy(() => import("../pages/MovieSearch"));
 const MovieDetails = lazy(() => import("../pages/MovieDetails"));
