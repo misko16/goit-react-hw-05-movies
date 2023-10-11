@@ -1,17 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
 const SearchForm = ({ onSearchSubmit }) => {
-  const [search, setSearch] = useState("");
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    onSearchSubmit(search);
-  };
-
-  const handleInputChange = (event) => {
-    setSearch(event.target.value);
-  };
-
   return (
     <form onSubmit={handleSubmit}>
       <input

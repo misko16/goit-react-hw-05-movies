@@ -18,14 +18,14 @@ function MovieSearch() {
       }
     };
 
-    const query = searchParams.get("query");
-    const page = searchParams.get("page");
+const { query, page } = Object.fromEntries(searchParams);
 
-    if (query) {
-      fetchMovies(query, page);
-    } else {
-      setMovies([]);
-    }
+if (query) {
+  fetchMovies(query, page);
+} else {
+  setMovies([]);
+}
+
   }, [searchParams]);
 
   return (
