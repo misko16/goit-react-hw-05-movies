@@ -1,4 +1,4 @@
-const ReviewsList = ({ reviews }) => { // Зверніть увагу на дужки {}
+const ReviewsList = ({ reviews }) => {
     return (
           reviews.map((review) => (
             <li key={review.id}>

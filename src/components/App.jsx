@@ -22,7 +22,7 @@ const App = () => {
             <Route path="reviews" element={<Reviews/>} />
             </Route>
           </Route>
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFound message={`Pleace return to home page`}/>} />
         </Routes>
       </Suspense>
     </div>

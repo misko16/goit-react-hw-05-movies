@@ -1,45 +1,46 @@
 import React, { useState, useEffect } from "react";
-import SearchForm from "components/refactoring/SearchForm";
-import MovieList from "components/refactoring/MovieList"; 
-import { useSearchParams } from "react-router-dom";
+import SearchBar from "../components/refactoring/SearchBar";
 import { handleSearch } from "../API";
+import MovieList from "../components/refactoring/MovieList"; // замініть шлях на реальний шлях до вашого файлу MovieList
+import NotFound from "./NotFound";
 
 function MovieSearch() {
-  const [movies, setMovies] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    const fetchMovies = async (searchText, page) => {
+    const fetchSearchResults = async () => {
       try {
-        const results = await handleSearch(searchText, page);
-        setMovies(results);
+        if (searchQuery) {
+          const results = await handleSearch(searchQuery);
+          setSearchResults(results);
+        } else {
+          setSearchResults([]);
+        }
       } catch (error) {
         console.error("Error searching for movies:", error);
       }
     };
+    fetchSearchResults();
+  }, [searchQuery]);
 
-const { query, page } = Object.fromEntries(searchParams);
-
-if (query) {
-  fetchMovies(query, page);
-} else {
-  setMovies([]);
-}
-
-  }, [searchParams]);
+  const handleSearchSubmit = (query) => {
+    setSearchQuery(query);
+  };
 
   return (
     <div>
       <h2>Search for Movies</h2>
-      <SearchForm onSearchSubmit={setSearchParams} />
-
-      {movies.length > 0 ? (
-        <MovieList trendingMovies={movies} />
+      <SearchBar onSearch={handleSearchSubmit} />
+  
+      {searchResults.length > 0 ? (
+        <MovieList trendingMovies={searchResults} />
       ) : (
-        <p>No results found</p>
-      )}
+        <NotFound message={`We don't have resaults`}/>  
+    )}
     </div>
   );
+  
 }
 
 export default MovieSearch;
