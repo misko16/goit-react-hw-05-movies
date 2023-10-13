@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/805.6f3f7da9.chunk.js","mappings":"6IAGA,UAHiB,SAAHA,GACV,OADsBA,EAAPC,OAEnB,C","sources":["pages/NotFound.jsx"],"sourcesContent":["const NotFound = ({message}) => {\n    return message;\n}\nexport default NotFound;"],"names":["_ref","message"],"sourceRoot":""}
