@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link, Outlet } from "react-router-dom"; // Додано Outlet
 import { fetchMovieDetails } from "API";
+import NavigateButton from "components/refactoring/NavigateButton";
 
 function MovieDetails() {
   const { movieId } = useParams();
@@ -22,6 +23,7 @@ function MovieDetails() {
 
   return (
     <div>
+      <NavigateButton/>
       <h1>{movieDetails.title}</h1>
       <img
         src={  
@@ -35,7 +37,7 @@ function MovieDetails() {
       <p>Rating: {movieDetails.vote_average}</p>
       <p>Overview: {movieDetails.overview}</p>
       <p>Genres: {movieDetails.genres.map((genre) => genre.name).join(", ")}</p>
-
+      
       <Link to={`cast`}>Cast</Link>
       <Link to={`reviews`}>Reviews</Link>
 

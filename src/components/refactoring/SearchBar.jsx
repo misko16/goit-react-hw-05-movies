@@ -22,9 +22,9 @@ function SearchBar({ onSearch }) {
         type="text"
         value={searchText}
         onChange={handleInputChange}
-        placeholder="Введіть текст для пошуку"
+        placeholder="Type name here"
       />
-      <button type="submit">Пошук</button>
+      <button type="submit">Search</button>
     </form>
   );
 }

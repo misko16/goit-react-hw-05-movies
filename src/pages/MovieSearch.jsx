@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "../components/refactoring/SearchBar";
 import { handleSearch } from "../API";
-import MovieList from "../components/refactoring/MovieList"; // замініть шлях на реальний шлях до вашого файлу MovieList
+import MovieList from "../components/refactoring/MovieList";
 import NotFound from "./NotFound";
 
 function MovieSearch() {
   const [searchResults, setSearchResults] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     const fetchSearchResults = async () => {
       try {
-        if (searchQuery) {
+        if (searchQuery && submitted) {
           const results = await handleSearch(searchQuery);
           setSearchResults(results);
         } else {
@@ -22,10 +23,11 @@ function MovieSearch() {
       }
     };
     fetchSearchResults();
-  }, [searchQuery]);
+  }, [searchQuery, submitted]);
 
   const handleSearchSubmit = (query) => {
     setSearchQuery(query);
+    setSubmitted(true);
   };
 
   return (
@@ -33,14 +35,13 @@ function MovieSearch() {
       <h2>Search for Movies</h2>
       <SearchBar onSearch={handleSearchSubmit} />
   
-      {searchResults.length > 0 ? (
-        <MovieList trendingMovies={searchResults} />
+      {submitted && searchResults.length === 0 ? (
+        <NotFound message={`We don't have results`}/>
       ) : (
-        <NotFound message={`We don't have resaults`}/>  
-    )}
+        <MovieList trendingMovies={searchResults} />
+      )}
     </div>
   );
-  
 }
 
 export default MovieSearch;
